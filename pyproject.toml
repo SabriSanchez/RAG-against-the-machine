@@ -1,0 +1,40 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "RAG"
+version = "0.1.0"
+requires-python = ">=3.12,<3.13"
+
+dependencies = [
+    "numpy>=1.26.0,<2.0.0",
+    "pydantic>=2.0,<3.0",
+    "fire>=0.6.0,<1.0",
+    "tqdm>=4.66.0",
+    "sentence-transformers>=3.0",
+    "transformers>=4.51.0",
+    "torch>=2.2.0",
+    "bm25s>=0.1.7",
+]
+
+[project.optional-dependencies]
+dev = [
+    "flake8>=7.3,<8.0",
+    "mypy>=1.0,<2.0"
+]
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["src*"]
+
+[tool.uv]
+cache-dir = ".uv-cache"
+
+[tool.mypy]
+strict = true
+disable_error_code = ["import-not-found", "import-untyped"]
+
+[[tool.mypy.overrides]]
+module = ["torch", "torch.*", "sentence_transformers", "sentence_transformers.*", "bm25s", "bm25s.*"]
+ignore_missing_imports = true

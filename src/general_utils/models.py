@@ -25,15 +25,10 @@ class DocumentChunk(MinimalSource):
     Attributes:
         chunk_id: Unique identifier for the chunk.
         text: Sanitized text content of the chunk.
-        secrets_sanitized: Total count of sensitive secrets masked in the text.
-        security_warnings: List of SAST security scanner warnings triggered by
-            the chunk content.
     """
 
     chunk_id: str
     text: str
-    secrets_sanitized: int = 0
-    security_warnings: List[str] = []
 
 
 class UnansweredQuestion(BaseModel):
@@ -96,7 +91,7 @@ class MinimalAnswer(MinimalSearchResults):
     answer: str
 
 
-class RetrievalResults(BaseModel):
+class StudentSearchResults(BaseModel):
     """Encapsulates evaluation submission payloads for top-K search results.
 
     Attributes:
@@ -108,8 +103,9 @@ class RetrievalResults(BaseModel):
     k: int
 
 
-class AnswerResults(BaseModel):
-    """Encapsulates evaluation submission payloads for search results and answers.
+class StudentSearchResultsAndAnswer(BaseModel):
+    """Encapsulates evaluation submission payloads for
+    search results and answers.
 
     Attributes:
         search_results: List of search results with generated answers.
